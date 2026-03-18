@@ -1,0 +1,18 @@
+version: '3.0'
+services:
+
+  proxy:
+    image: telegrammessenger/proxy:1.4
+    hostname: mtmproxy
+    ports:
+      - 443:443
+    # network_mode: host
+    restart: unless-stopped
+    user: nobody
+    volumes:
+      - ./.docker/data:/data
+      - ./.docker/etc:/etc/telegram
+
+# mkdir -p .docker/{data,etc}
+# docker run --rm --entrypoint /bin/bash telegrammessenger/proxy:1.4 -c "tar -cC /etc/telegram hello-explorers-how-are-you-doing" | tar -xC .docker/etc
+# chown -R 65534:65534 .docker
